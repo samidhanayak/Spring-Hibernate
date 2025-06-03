@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -26,4 +27,38 @@ public class StudentController {
         Student updated = studentService.updateStudent(id, student);
         return ResponseEntity.ok(updated);
     }
+
+    @GetMapping("/byId")
+    public Optional<Student> getById(@RequestParam("id") Integer identification){
+        Optional<Student> studentById = studentService.getStudentById(identification);
+
+        return studentById;
+    }
+    @GetMapping("/byId/{id}")
+    public Optional<Student> getByIdInPath(@PathVariable("id") Integer id){
+        Optional<Student> studentById = studentService.getStudentById(id);
+
+        return studentById;
+    }
+
+    @PostMapping("/create")
+    public Student createStudent(@RequestBody Student student){
+        return studentService.createStudent(student);
+    }
+
+    @PutMapping("/update")
+    public Student updateStudent(@RequestBody Student student){
+        return studentService.updateStudent(student);
+    }
+
+    @PatchMapping("/patch")
+    public Student patch(@RequestBody Student student){
+        return studentService.patchUpdate(student);
+    }
+
+    @GetMapping("/allByName")
+    public List<Student> getAllByFirstName(@RequestParam String name){
+        return studentService.getAllByFirstName(name);
+    }
+
 }
