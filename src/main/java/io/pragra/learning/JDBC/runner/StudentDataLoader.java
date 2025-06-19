@@ -13,13 +13,13 @@ public class StudentDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Student student = new Student();
-        student.setId(6);
-        student.setFirstName("Tom");
-        student.setLastName("H");
-        student.setEmail("Tom@gmail.com");
-        student.setPhoneNumber("12334355");
+//        Student student = new Student();
+//        student.setId(6);
+//        student.setFirstName("Tom");
+//        student.setLastName("H");
+//        student.setEmail("Tom@gmail.com");
+//        student.setPhoneNumber("12334355");
 
-        studentRepo.save(student);
+        //studentRepo.save(student);
     }
 }

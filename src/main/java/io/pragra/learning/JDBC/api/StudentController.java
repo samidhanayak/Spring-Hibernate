@@ -3,6 +3,8 @@ package io.pragra.learning.JDBC.api;
 import io.pragra.learning.JDBC.entities.Student;
 import io.pragra.learning.JDBC.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +43,22 @@ public class StudentController {
         return studentById;
     }
 
+//    @PostMapping("/create")
+//    public Student createStudent(@RequestBody Student student){
+//        return studentService.createStudent(student);
+//    }
+
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student student){
-        return studentService.createStudent(student);
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        Student studentEntity = studentService.createStudent(student);
+        ResponseEntity<Student> studentResponseEntity = ResponseEntity
+                .status(HttpStatusCode.valueOf(201))
+                .header("Action", "Created")
+                .header("GenId", String.valueOf(studentEntity.getId()))
+                .header("status", String.valueOf(1100))
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(studentEntity);
+        return studentResponseEntity;
     }
 
     @PutMapping("/update")
